@@ -10,13 +10,13 @@ import (
 
 // ValidateSMS validates the SMS struct
 func ValidateSMS(sms *models.OutgoingSMS) error {
-	if err := validateFrom(sms.From); err != nil {
+	if err := ValidateFrom(sms.From); err != nil {
 		return err
 	}
-	if err := validateTo(sms.To); err != nil {
+	if err := ValidateTo(sms.To); err != nil {
 		return err
 	}
-	if err := validateMessage(sms.Text); err != nil {
+	if err := ValidateMessage(sms.Text); err != nil {
 		return err
 	}
 	return nil
@@ -53,8 +53,8 @@ func ParseFlagsAndValidate() (*models.OutgoingSMS, error) {
 	return sms, nil
 }
 
-// validateFrom checks that 'from' is not empty
-func validateFrom(from string) error {
+// ValidateFrom checks that 'from' is not empty
+func ValidateFrom(from string) error {
 	if len(from) == 0 {
 		return errors.New("sender ID must be set")
 	}
@@ -64,16 +64,16 @@ func validateFrom(from string) error {
 	return nil
 }
 
-// validateTo checks that 'to' is a valid international phone number
-func validateTo(to string) error {
+// ValidateTo checks that 'to' is a valid international phone number
+func ValidateTo(to string) error {
 	if len(to) < 2 || to[0] != '+' || !isNumeric(to[1:]) {
 		return errors.New("receiver must be a valid international phone number")
 	}
 	return nil
 }
 
-// validateMessage checks that 'message' is at least 10 characters long
-func validateMessage(message string) error {
+// ValidateMessage checks that 'message' is at least 10 characters long
+func ValidateMessage(message string) error {
 	if len(message) < 10 {
 		return errors.New("message must be at least 10 characters long")
 	}
@@ -88,4 +88,12 @@ func isNumeric(s string) bool {
 		}
 	}
 	return true
+}
+
+// Minimum returns the minimum of two integers
+func Minimum(x, y int) int {
+	if x > y {
+		return y
+	}
+	return x
 }

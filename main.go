@@ -2,9 +2,12 @@ package main
 
 import (
 	"46elks-tui/internal/models"
+	"46elks-tui/internal/ui"
 	"46elks-tui/internal/utils"
 	"46elks-tui/pkg/elks"
 	"fmt"
+	tea "github.com/charmbracelet/bubbletea"
+	"os"
 )
 
 func main() {
@@ -36,5 +39,9 @@ func sendSMS(client *elks.Client, sms *models.OutgoingSMS) {
 
 func displayTUI() {
 	fmt.Println("Showing TUI...")
-	// TODO: Handle TUI, i.e. display a menu and send SMSes based on user input.
+	_, err := tea.NewProgram(ui.NewModel()).Run()
+	if err != nil {
+		fmt.Println("Oh no:", err)
+		os.Exit(1)
+	}
 }

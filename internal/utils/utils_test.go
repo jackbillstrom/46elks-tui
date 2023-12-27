@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// TestValidateFrom tests the validateFrom function
+// TestValidateFrom tests the ValidateFrom function
 func TestValidateFrom(t *testing.T) {
 	tests := []struct {
 		from   string
@@ -17,14 +17,14 @@ func TestValidateFrom(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := validateFrom(test.from)
+		err := ValidateFrom(test.from)
 		if (err == nil) != test.expect {
 			t.Errorf("validateFrom(%s) = %v, want %v", test.from, err, test.expect)
 		}
 	}
 }
 
-// TestValidateTo tests the validateTo function
+// TestValidateTo tests the ValidateTo function
 func TestValidateTo(t *testing.T) {
 	tests := []struct {
 		to     string
@@ -36,14 +36,14 @@ func TestValidateTo(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := validateTo(test.to)
+		err := ValidateTo(test.to)
 		if (err == nil) != test.expect {
 			t.Errorf("validateTo(%s) = %v, want %v", test.to, err, test.expect)
 		}
 	}
 }
 
-// TestValidateMessage tests the validateMessage function
+// TestValidateMessage tests the ValidateMessage function
 func TestValidateMessage(t *testing.T) {
 	tests := []struct {
 		message string
@@ -54,7 +54,7 @@ func TestValidateMessage(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := validateMessage(test.message)
+		err := ValidateMessage(test.message)
 		if (err == nil) != test.expect {
 			t.Errorf("validateMessage(%s) = %v, want %v", test.message, err, test.expect)
 		}
